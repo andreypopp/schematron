@@ -1,7 +1,7 @@
 Yet another boilerplate free schema validation library, Connect/Express
 middleware included.
 
-    {validate, any, optional} = require 'schematic'
+    {validate, any, optional} = require 'schematron'
 
     schema = {
       key: any
@@ -20,7 +20,7 @@ middleware included.
 
 Or use Connect/Express middleware
 
-    {validate} = require 'schematic/middleware'
+    {validate} = require 'schematron/middleware'
 
     app.get '/search',
       validate(q: String, limit: optional(Number)),

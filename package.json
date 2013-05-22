@@ -1,5 +1,5 @@
 {
-  "name": "schematic",
+  "name": "schematron",
   "version": "0.1.0",
   "description": "Yet another schema validation library, including Connect/Express middlewares",
   "main": "lib/index.js",
@@ -13,9 +13,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/andreypopp/schemantic.git"
+    "url": "git://github.com/andreypopp/schematron.git"
   },
-  "homepage": "https://github.com/andreypopp/schematic",
+  "homepage": "https://github.com/andreypopp/schematron",
   "keywords": [
     "schema",
     "validation",
