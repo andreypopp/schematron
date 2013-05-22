@@ -40,7 +40,8 @@ describe 'schema validation', ->
   it 'validates either', ->
     deepEqual validate(either(Number, String), 1).errors, undefined
     deepEqual validate(either(Number, String), '1').errors, undefined
-    notDeepEqual validate(either(Number, String), true).errors, undefined
+    deepEqual validate(either(Number, String), true).errors, ["should be a number", "should be a string"]
+
 
   it 'validates any', ->
     schema = any

@@ -23,12 +23,21 @@ class optional
     this.schema = schema
     this.defaultValue = defaultValue
 
-class either
+class either extends type
   constructor: (a, b) ->
     if not (this instanceof either)
       return new either(a, b)
     this.a = a
     this.b = b
+
+  validate: (data, options) ->
+    tryB = {}
+    tryA = validate(this.a, data, options)
+    if tryA.errors
+      tryB = validate(this.b, data, options)
+    if tryB.errors
+      errors = [tryA.errors, tryB.errors]
+    return {errors, data: tryA.data or tryB.data}
 
 validate = (schema, data, options = {}) ->
   errors = undefined
@@ -41,19 +50,13 @@ validate = (schema, data, options = {}) ->
     return {errors, data}
 
   if schema instanceof type
-    return schema.validate(data)
+    return schema.validate(data, options)
 
   if schema instanceof any or schema is any
     return {errors, data}
 
   if schema instanceof optional
     schema = schema.schema
-
-  if schema instanceof either
-    {errors, data} = validate(schema.a, data, options)
-    if errors
-      {errors, data} = validate(schema.b, data, options)
-    return {errors, data}
 
   if schema is Number
       data = Number(data) if options.weak
