@@ -1,6 +1,6 @@
 {
   "name": "schematic",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Yet another schema validation library, including Connect/Express middlewares",
   "main": "lib/index.js",
   "dependencies": {
