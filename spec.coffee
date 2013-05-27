@@ -133,3 +133,53 @@ describe 'weak schema validation', ->
     assertValid schema: schema, data: true
     assertValid schema: schema, data: []
     assertValid schema: schema, data: {}
+
+describe 'middleware', ->
+
+  express = require 'express'
+  request = require 'supertest'
+
+  middleware = require './src/middleware'
+
+
+  app = express()
+  app.use express.bodyParser()
+
+  app.get '/valid',
+    middleware.validate(x: Number, y: String),
+    (req, res) ->
+      deepEqual req.validQuery, {x: 1, y: '2'}
+      res.send 200
+
+  app.post '/valid',
+    middleware.validate(x: Number, y: String),
+    (req, res) ->
+      deepEqual req.validBody, {x: 1, y: '2'}
+      res.send 200
+
+  describe 'query string validation', ->
+
+    it 'validates query string', (done) ->
+      request(app)
+        .get('/valid')
+        .query(x: 1, y: '2')
+        .expect(200, (x) -> done())
+
+    it 'returns 400 on invalid data', (done) ->
+      request(app)
+        .get('/valid')
+        .query(x: 1)
+        .expect(400, done)
+
+  describe 'body validation', ->
+
+    it 'validates body', (done) ->
+      request(app)
+        .post('/valid')
+        .send(x: 1, y: '2')
+        .expect(200, done)
+
+    it 'returns 400 on invalid data', (done) ->
+      request(app)
+        .post('/valid')
+        .expect(400, done)

@@ -1,9 +1,9 @@
 {contains, isEmpty} = require 'underscore'
-{validate} = require './index'
+schematron = require './index'
 
 validateBody = (schema) ->
   (req, res, next) ->
-    {errors, data} = validate(schema, req.body)
+    {errors, data} = schematron.validate(schema, req.body)
     if not isEmpty errors
       res.send 400, errors
     else
@@ -12,7 +12,7 @@ validateBody = (schema) ->
 
 validateQuery = (schema) ->
   (req, res, next) ->
-    {errors, data} = validate(schema, req.query, weak: true)
+    {errors, data} = schematron.validate(schema, req.query, weak: true)
     if not isEmpty errors
       res.send 400, errors
     else
