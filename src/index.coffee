@@ -69,7 +69,9 @@ validate = (schema, data, options = {}) ->
 
   else if schema is Boolean
     if options.weak
-      data = if contains(['true', '1', 'yes'], data.toLowerCase())
+      data = if isBoolean data
+        data
+      else if contains(['true', '1', 'yes'], data.toLowerCase())
         true
       else if contains(['false', '0', 'no'], data.toLowerCase())
         false
