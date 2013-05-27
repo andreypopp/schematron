@@ -76,7 +76,7 @@ validate = (schema, data, options = {}) ->
       else
         undefined
     if not isBoolean data
-      errors = "should be a bool"
+      errors = "should be a boolean"
 
   else if schema is Date
     data = new Date(data) if options.weak
@@ -101,8 +101,8 @@ validate = (schema, data, options = {}) ->
       errors = "should be an object"
     else
       newData = {}
-      for idx, subContract of schema 
-        tryX = validate(subContract, data[idx], options)
+      for idx, subSchema of schema 
+        tryX = validate(subSchema, data[idx], options)
         if tryX.errors
           errors = errors or {}
           errors[idx] = tryX.errors
