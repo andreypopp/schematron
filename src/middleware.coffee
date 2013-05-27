@@ -1,3 +1,4 @@
+{contains, isEmpty} = require 'underscore'
 {validate} = require './index'
 
 validateBody = (schema) ->

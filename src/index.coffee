@@ -1,5 +1,5 @@
 {extend, isObject, isNumber, isString, contains,
-  isArray, isBoolean, isDate, isEmpty} = require 'underscore'
+  isArray, isBoolean, isDate} = require 'underscore'
 
 class type
   constructor: (params) ->
