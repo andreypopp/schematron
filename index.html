@@ -1,0 +1,59 @@
+<!doctype html>
+<meta http-equiv="Content-Type" content="text/html; charset=utf8" />
+<title>schematron</title>
+<link rel="stylesheet" href="_static/default.css" type="text/css" />
+<script src="_static/jquery.js"></script>
+<script src="_static/jquery.lettering.js"></script>
+<script>
+  $(function() {
+    var $headers = $('h1');
+    $headers.lettering('words').children('span').lettering();
+    $headers.children('span').children('span:contains("¶")').remove();
+  });
+</script>
+<div class="main">
+  
+  <div class="section" id="schematron">
+<h1>schematron<a class="headerlink" href="#schematron" title="Permalink to this headline">¶</a></h1>
+<p>Yet another boilerplate-free schema validation library, Connect/Express middleware included</p>
+<p>To get started, install <tt class="docutils literal"><span class="pre">schematron</span></tt> package via <tt class="docutils literal"><span class="pre">npm</span></tt>:</p>
+<div class="highlight-python"><pre>% npm install schematron</pre>
+</div>
+<p>After that you will be able to use <tt class="docutils literal"><span class="pre">schematron</span></tt> library in your code.  The
+basic usage example is as follows:</p>
+<div class="highlight-python"><pre>var schematron = require('schematron'),
+    validate = schematron.validate,
+    optional = schematron.optional,
+    either = schematron.either,
+    any = schematron.any;
+
+
+var schema = {
+  a: Number,
+  b: optional(String),
+  c: [either(String, Boolean)]
+  d: {
+    e: any,
+    f: optional(Number)
+  }
+};
+
+result = validate(schema, {a: 1});
+if (result.errors) {
+  // handle errors
+} else {
+  var data = result.data;
+}</pre>
+</div>
+</div>
+
+
+  <footer>
+    <p>schematron 0.2.1</p>
+    <p>Generated using Sphinx 1.2b1</p>
+  </footer>
+</div>
+</div>
+<a class="github-ribbon" href="https://github.com/andreypopp/schematron">
+  <img src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png" alt="Fork me on GitHub">
+</a>
